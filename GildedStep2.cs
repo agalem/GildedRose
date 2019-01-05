@@ -6,9 +6,15 @@ namespace csharpcore
     public class GildedRose
     {
         IList<Item> Items;
+		IList<string> ItemsThatDoesntGetOlder;
+		
         public GildedRose(IList<Item> Items)
         {
             this.Items = Items;
+            ItemsThatDoesntGetOlder = new List<string>
+            {
+                "Sulfuras, Hand of Ragnaros"
+            };
         }
         private Boolean isUnderHighestQualityValue(Item item) {
             return item.Quality < 50;
@@ -33,7 +39,6 @@ namespace csharpcore
 
         private void NormalUpdate(Item item) 
         {
-            item.SellIn = item.SellIn - 1;
             DecreaseQualityValue(item);
             if(item.SellIn < 0) 
             {
@@ -43,7 +48,6 @@ namespace csharpcore
 
         private void BrieUpdate(Item item)
         {
-            item.SellIn = item.SellIn - 1;
             IncreaseQualityValue(item);
             if(item.SellIn < 0) 
             {
@@ -58,7 +62,6 @@ namespace csharpcore
 
         private void BackstageUpdate(Item item)
         {
-            item.SellIn = item.SellIn - 1;
             IncreaseQualityValue(item);
 
             if(item.SellIn < 10) 
@@ -81,6 +84,11 @@ namespace csharpcore
         {
             foreach(Item item in Items)
             {
+
+                if(!ItemsThatDoesntGetOlder.Contains(item.Name)) {
+                    item.SellIn = item.SellIn - 1;
+                }
+
                 if (item.Name == "Sulfuras, Hand of Ragnaros")
                 {
                     SulfurasUpdate(item);
