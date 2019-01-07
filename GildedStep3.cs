@@ -52,16 +52,6 @@ namespace csharpcore
             DecreaseQualityValue(item);
         }
 
-        private void BrieUpdate(Item item)
-        {
-            IncreaseQualityValue(item);
-        }
-
-        private void SulfurasUpdate(Item item)
-        {
-
-        }
-
         private void BackstageUpdate(Item item)
         {
             if(item.SellIn < 10) 
@@ -91,16 +81,11 @@ namespace csharpcore
         {
             foreach(Item item in Items)
             {
-
                 if(!ItemsThatDoesntGetOlder.Contains(item.Name)) {
                     item.SellIn = item.SellIn - 1;
                 }
 
-                if (item.Name == "Sulfuras, Hand of Ragnaros")
-                {
-                    SulfurasUpdate(item);
-                } 
-                else if (ItemsThatIncreaseQuality.Contains(item.Name))
+                if (ItemsThatIncreaseQuality.Contains(item.Name))
                 {
                     IncreasingItemsUpdate(item);
                 }
